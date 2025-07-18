@@ -1,5 +1,4 @@
-import { Product } from "../models/Product";
-
-export function calculateDiscount(product: Product): number {
-    return parseFloat((product.price * product.discountPercentage / 100).toFixed(2));
+export function calculateDiscount(price: number, discountPercentage: number): number {
+    const dollarDiscount = parseFloat((price * discountPercentage / 100).toFixed(2));
+    return dollarDiscount;
 }

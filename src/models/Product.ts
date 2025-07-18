@@ -1,3 +1,5 @@
+import { calculateDiscount } from "../utils/discountCalculator";
+
 export class Product {
     id: number;
     title: string;
@@ -22,8 +24,16 @@ export class Product {
     }
 
     getPriceWithDiscount(): number {
-        const priceWithDiscount = this.price - (this.price * this.discountPercentage / 100);
-        return parseFloat(priceWithDiscount.toFixed(2));
+        const discount = calculateDiscount(this.price, this.discountPercentage);
+        return parseFloat((this.price - discount).toFixed(2));
     }
 }
 
+//// If calculating the final price including discount and tax was required, I would use this method
+
+// getFinalPrice(): number {
+//     const discount = calculateDiscount(this.price, this.discountPercentage);
+//     const discountedPrice = this.price - discount;
+//     const tax = calculateTax(discountedPrice, this.category);
+//     return parseFloat((discountedPrice + tax).toFixed(2));
+// }

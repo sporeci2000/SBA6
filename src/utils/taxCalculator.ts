@@ -1,12 +1,13 @@
-import { Product } from "../models/Product";
-
-export function calculateTax(product: Product): number {
-     if (product.category === 'groceries') {
+export function calculateTax(price: number, category: string): number {
+    // Converted tax rates into decimal format (3% => 0.03; 4.75=> 0.475)  to simplify the calculation directly in code
+    if (category === 'groceries') {
         const taxRate = 0.03;
-        return parseFloat((product.price * taxRate).toFixed(2));
+        const dollarTax = parseFloat((price * taxRate).toFixed(2));
+        return dollarTax;
     } else {
         const taxRate = 0.0475;
-        return parseFloat((product.price * taxRate).toFixed(2));
+        const dollarTax = parseFloat((price * taxRate).toFixed(2));
+        return dollarTax;
     }
-} 
+}
 
