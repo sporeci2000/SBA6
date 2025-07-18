@@ -19,7 +19,7 @@ export class Product {
     displayDetails(): string {
 
         return `This product is: ${this.title} The description of this product is: ${this.description} Category: ${this.category} The price of this product is: $${this.price} The discount percentage of this product is: ${this.discountPercentage}%`
-    };
+    }
 
     getPriceWithDiscount(): number {
         const priceWithDiscount = this.price - (this.price * this.discountPercentage / 100);
