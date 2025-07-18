@@ -1,7 +1,5 @@
 import { Product } from "./models/Product";
 import { fetchProducts } from "./services/apiService";
-import { calculateDiscount } from "./utils/discountCalculator";
-import { calculateTax } from "./utils/taxCalculator";
 import { NetworkError, DataError } from './utils/errorHandler';
 
 async function handleApi() {
@@ -10,11 +8,8 @@ async function handleApi() {
 
         products.forEach(product => {
             console.log(product.displayDetails());
+            console.log(product.getPriceWithDiscount());
 
-            const discount = calculateDiscount(product);
-            const tax = calculateTax(product);
-
-            console.log(`Discount is: $${discount} Tax is: $${tax} Price after discount is: $${product.getPriceWithDiscount()}`);
         });
 
     } catch (error) {
