@@ -11,19 +11,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchProducts = fetchProducts;
 const Product_1 = require("../models/Product");
+const errorHandler_1 = require("../utils/errorHandler");
 function fetchProducts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("https://dummyjson.com/products");
             if (!response.ok) {
-                throw new Error(`Network response was not ok.`);
+                throw new errorHandler_1.NetworkError(`Network response was not ok.`);
             }
-            const data = yield response.json();
-            return data.products.map((p) => new Product_1.Product(p.id, p.title, p.description, p.category, p.price, p.discountPercentage));
+            const apiResponse = yield response.json();
+            if (!apiResponse.products) {
+                throw new errorHandler_1.DataError("Products data is not ok.");
+            }
+            return apiResponse.products.map((product) => new Product_1.Product(product.id, product.title, product.description, product.category, product.price, product.discountPercentage));
         }
         catch (error) {
             console.error("Fetch error:", error);
-            return [];
+            throw error;
         }
     });
 }

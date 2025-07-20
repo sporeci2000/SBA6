@@ -9,19 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//import { Product } from "./models/Product";
 const apiService_1 = require("./services/apiService");
-const discountCalculator_1 = require("./utils/discountCalculator");
-const taxCalculator_1 = require("./utils/taxCalculator");
 const errorHandler_1 = require("./utils/errorHandler");
 function handleApi() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const products = yield (0, apiService_1.fetchProducts)();
-            products.forEach(product => {
+            const productsArray = yield (0, apiService_1.fetchProducts)();
+            productsArray.forEach(product => {
                 console.log(product.displayDetails());
-                const discount = (0, discountCalculator_1.calculateDiscount)(product);
-                const tax = (0, taxCalculator_1.calculateTax)(product);
-                console.log(`Discount is: $${discount} Tax is: $${tax} Price after discount is: $${product.getPriceWithDiscount()}`);
+                console.log(product.getPriceWithDiscount());
             });
         }
         catch (error) {

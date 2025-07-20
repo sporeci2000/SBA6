@@ -1,12 +1,12 @@
-import { Product } from "./models/Product";
+//import { Product } from "./models/Product";
 import { fetchProducts } from "./services/apiService";
 import { NetworkError, DataError } from './utils/errorHandler';
 
 async function handleApi() {
     try {
-        const products = await fetchProducts();
+        const productsArray = await fetchProducts();
 
-        products.forEach(product => {
+        productsArray.forEach(product => {
             console.log(product.displayDetails());
             console.log(product.getPriceWithDiscount());
 
